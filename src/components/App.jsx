@@ -31,7 +31,7 @@ export const App = () => {
         color: '#010101',
       }}
     >
-      <>
+      
       <DrawlerBtn><TemporaryDrawer /></DrawlerBtn>
 
         {isLoading && !error && (
@@ -49,12 +49,15 @@ export const App = () => {
           </Loader>
         )}
 
-        {allTasks.length > 0 && (
-          <div>
-            <TaskList />
-          </div>
-        )}
-      </>
+{allTasks.length > 0 ? (
+      <div>
+        <TaskList />
+      </div>
+    ) : (
+      <h2>Add Your first task</h2>
+    )}
+        
+      
       <GlobalStyle />
     </div>
   );
