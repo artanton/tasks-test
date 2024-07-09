@@ -9,10 +9,14 @@ import {
 } from './taskFormStyled';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../../redux/operators';
+import Notiflix from 'notiflix';
+
+
+
 
 const taskSchema = Yup.object().shape({
   text: Yup.string()
-    .matches(/^[^!]*$/, 'The task cannot contain the "!" character.')
+    // .matches(/^[^!]*$/, 'The task cannot contain the "!" character.')
     .required('Required'),
 });
 
@@ -20,6 +24,10 @@ export const TaskForm = ({ onClose }) => {
   const dispatchTask = useDispatch();
 
   const onAdd = (values, actions) => {
+    if (values.text.includes('!')) {
+      Notiflix.Notify.failure('The task field cannot contain "!" character.');
+      return;
+    }
     const newTask = {
       text: values.text,
       date: new Date().toISOString(), 

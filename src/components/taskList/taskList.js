@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { TaskItem } from '../taskItem/taskItem';
-import { PhoneNoList } from './taskListStyled';
+import { TasksList } from './taskListStyled';
 
 import {selectTask} from '../../redux/selectors';
 
@@ -8,7 +8,7 @@ export const TaskList = () => {
   const Tasks = useSelector(selectTask);
 
   return (
-    <PhoneNoList>
+    <TasksList>
       {Tasks.map(task => {
         return (
           <li key={task.id}>
@@ -16,6 +16,6 @@ export const TaskList = () => {
           </li>
         );
       })}
-    </PhoneNoList>
+    </TasksList>
   );
 };

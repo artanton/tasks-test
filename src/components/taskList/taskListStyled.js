@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-export const PhoneNoList = styled.ul`
+export const TasksList = styled.ul`
   display: flex;
   flex-direction: column;
 
-  gap: ${p => p.theme.gap.big};
+  gap: ${p => p.theme.gap.norm};
 `;
