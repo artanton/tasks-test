@@ -1,26 +1,27 @@
-import { ContactForm } from './ContactForm/ContactForm';
+import { ContactForm } from './taskForm/taskForm';
 import { GlobalStyle } from './GlobalStyle';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
+import { ContactList } from './taskList/taskList';
+// import { Filter } from './Filter/Filter';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  selectContact,
+  selectTask,
   selectError,
   selectIsLoading,
-  selectSearchedContacts,
+ 
 } from './../redux/selectors';
 import { useEffect } from 'react';
-import { fetchContacts } from './../redux/operators';
+import { fetchTasks } from './../redux/operators';
+import { MagnifyingGlass } from 'react-loader-spinner';
 
 export const App = () => {
-  const actualContacts = useSelector(selectSearchedContacts);
-  const allContacts = useSelector(selectContact);
+  // const actualContacts = useSelector(selectSearchedContacts);
+  const allTasks = useSelector(selectTask);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchTasks());
   }, [dispatch]);
 
   return (
@@ -35,20 +36,32 @@ export const App = () => {
       }}
     >
       <div>
-        <h1>Phonebook</h1>
+        <h1>Tasks</h1>
         <ContactForm />
 
-        <h2>Contacts</h2>
-        {isLoading && !error && <b>Request in progress...</b>}
+        {isLoading && !error && (
+          <div>
+            <MagnifyingGlass
+              visible={true}
+              height="120"
+              width="120"
+              ariaLabel="magnifying-glass-loading"
+              wrapperStyle={{}}
+              wrapperClass="magnifying-glass-wrapper"
+              glassColor="#3d9bba"
+              color="#0f0d0d"
+            />
+          </div>
+        )}
 
-        {allContacts.length > 0 && (
+        {/* {allTasks.length > 0 && (
           <div>
             <p>Find contacts by name</p>
             <Filter />
           </div>
-        )}
+        )} */}
 
-        {actualContacts.length > 0 && (
+        {allTasks.length > 0 && (
           <div>
             <ContactList />
           </div>
