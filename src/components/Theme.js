@@ -3,6 +3,7 @@ export const theme = {
     darkGray: '#dbdfdf',
     lightGray: '#f3f5f5',
     borderGray: '#3e3f3f',
+    black:'#010101',
   },
 
   borderRad: {

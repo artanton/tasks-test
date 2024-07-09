@@ -8,7 +8,7 @@ import { fetchTasks } from './../redux/operators';
 import { MagnifyingGlass } from 'react-loader-spinner';
 
 import TemporaryDrawer from './swipeableEdgeDrawer/SwipeableEdgeDrawer';
-import { DrawlerBtn, Loader } from './AppStyled';
+import { Container, DrawlerBtn, Loader } from './AppStyled';
 
 export const App = () => {
   const allTasks = useSelector(selectTask);
@@ -21,16 +21,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 20,
-        color: '#010101',
-      }}
-    >
+    <Container>
       
       <DrawlerBtn><TemporaryDrawer /></DrawlerBtn>
 
@@ -59,6 +50,6 @@ export const App = () => {
         
       
       <GlobalStyle />
-    </div>
+    </Container>
   );
 };
