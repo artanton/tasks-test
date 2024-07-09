@@ -17,8 +17,8 @@ export const theme = {
   },
 
   gap: {
-    big: '20px',
-    norm: '8px',
+    big: '50px',
+    norm: '20px',
     small: '4px',
   },
 };

@@ -19,7 +19,12 @@ const taskSchema = Yup.object().shape({
 export const TaskForm = ({ onClose }) => {  
   const dispatchTask = useDispatch();
 
-  const onAdd = (newTask, actions) => {
+  const onAdd = (values, actions) => {
+    const newTask = {
+      text: values.text,
+      date: new Date().toISOString(), 
+    };
+    
     dispatchTask(addTask(newTask));
     actions.resetForm();
     if (onClose) {  
@@ -30,14 +35,15 @@ export const TaskForm = ({ onClose }) => {
     <Formik
       initialValues={{
         text: '',
+        date: new Date()
       }}
       validationSchema={taskSchema}
       onSubmit={onAdd}
     >
       <FormStyled>
         <FieldGroup>
-          Task text
-          <FieldStyled name="text" type="text" as="textarea" placeholder="Insert your task here" />
+          
+          <FieldStyled name="text" type="text" placeholder="Insert your task here" />
           <ErrorMessageStyled name="text" component="span" />
         </FieldGroup>
 
