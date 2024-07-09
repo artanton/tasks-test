@@ -16,14 +16,16 @@ const taskSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export const ContactForm = () => {
+export const TaskForm = ({ onClose }) => {  
   const dispatchTask = useDispatch();
 
   const onAdd = (newTask, actions) => {
     dispatchTask(addTask(newTask));
     actions.resetForm();
+    if (onClose) {  
+      onClose();  
+    }
   };
-
   return (
     <Formik
       initialValues={{
@@ -34,8 +36,8 @@ export const ContactForm = () => {
     >
       <FormStyled>
         <FieldGroup>
-          Task 
-          <FieldStyled name="text" type="text" placeholder="Insert your task here" />
+          Task text
+          <FieldStyled name="text" type="text" as="textarea" placeholder="Insert your task here" />
           <ErrorMessageStyled name="text" component="span" />
         </FieldGroup>
 
