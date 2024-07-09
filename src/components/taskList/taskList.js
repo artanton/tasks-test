@@ -4,7 +4,7 @@ import { PhoneNoList } from './taskListStyled';
 
 import {selectTask} from '../../redux/selectors';
 
-export const ContactList = () => {
+export const TaskList = () => {
   const Tasks = useSelector(selectTask);
 
   return (

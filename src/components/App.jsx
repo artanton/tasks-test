@@ -1,20 +1,16 @@
-import { ContactForm } from './taskForm/taskForm';
 import { GlobalStyle } from './GlobalStyle';
-import { ContactList } from './taskList/taskList';
-// import { Filter } from './Filter/Filter';
+import { TaskList } from './taskList/taskList';
+
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectTask,
-  selectError,
-  selectIsLoading,
- 
-} from './../redux/selectors';
+import { selectTask, selectError, selectIsLoading } from './../redux/selectors';
 import { useEffect } from 'react';
 import { fetchTasks } from './../redux/operators';
 import { MagnifyingGlass } from 'react-loader-spinner';
 
+import TemporaryDrawer from './swipeableEdgeDrawer/SwipeableEdgeDrawer';
+import { DrawlerBtn, Loader } from './AppStyled';
+
 export const App = () => {
-  // const actualContacts = useSelector(selectSearchedContacts);
   const allTasks = useSelector(selectTask);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
@@ -35,12 +31,11 @@ export const App = () => {
         color: '#010101',
       }}
     >
-      <div>
-        <h1>Tasks</h1>
-        <ContactForm />
+      <>
+      <DrawlerBtn><TemporaryDrawer /></DrawlerBtn>
 
         {isLoading && !error && (
-          <div>
+          <Loader>
             <MagnifyingGlass
               visible={true}
               height="120"
@@ -51,22 +46,15 @@ export const App = () => {
               glassColor="#3d9bba"
               color="#0f0d0d"
             />
-          </div>
+          </Loader>
         )}
-
-        {/* {allTasks.length > 0 && (
-          <div>
-            <p>Find contacts by name</p>
-            <Filter />
-          </div>
-        )} */}
 
         {allTasks.length > 0 && (
           <div>
-            <ContactList />
+            <TaskList />
           </div>
         )}
-      </div>
+      </>
       <GlobalStyle />
     </div>
   );
